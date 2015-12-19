@@ -46,7 +46,7 @@ group :test do
   gem 'uri-handler'
   gem 'selenium'
   gem 'selenium-client'
-  gem 'coveralls', require: false
+  gem 'coveralls', :require => false
 end
 
 group :production do
