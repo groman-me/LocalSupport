@@ -9,7 +9,7 @@ test: &test
   <<: *dev
   database: ls_test
 
-postgresql: &postgresql
+production:
   adapter: postgresql
   database: <%=ENV['OPENSHIFT_APP_NAME']%>
   username: <%=ENV['OPENSHIFT_POSTGRESQL_DB_USERNAME']%>
