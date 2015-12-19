@@ -11,6 +11,8 @@ test: &test
 
 production:
   adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: <%=ENV['OPENSHIFT_APP_NAME']%>
   username: <%=ENV['OPENSHIFT_POSTGRESQL_DB_USERNAME']%>
   password: <%=ENV['OPENSHIFT_POSTGRESQL_DB_PASSWORD']%>
