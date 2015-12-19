@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-ruby '2.0.0'
+# ruby '2.0.0'
 gem 'rails', '~> 4.2.0'
 gem 'pg'
 gem 'devise', '~> 3.4.0'
 gem 'devise_invitable', '~> 1.3.0'
-gem 'heroku-api'
+# gem 'heroku-api'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -33,6 +33,7 @@ group :development do
   #gem 'ruby-debug19', :require => 'ruby-debug'
   #gem 'debugger', '~> 1.6.8'
   gem 'railroady'
+  gem 'quiet_assets'
 end
 
 group :test do

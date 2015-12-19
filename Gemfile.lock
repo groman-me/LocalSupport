@@ -108,7 +108,6 @@ GEM
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
-    excon (0.45.3)
     execjs (2.5.2)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -124,9 +123,6 @@ GEM
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     gmaps4rails (2.1.2)
-    heroku-api (0.3.23)
-      excon (~> 0.44)
-      multi_json (~> 1.8)
     hike (1.2.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -172,6 +168,8 @@ GEM
       activerecord (~> 4.0)
     pg (0.18.2)
     phantomjs (1.9.8.0)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -334,7 +332,6 @@ DEPENDENCIES
   font-awesome-rails
   geocoder
   gmaps4rails (= 2.1.2)
-  heroku-api
   jasmine (= 2.1.0)
   jasmine-jquery-rails (= 2.0.2)
   jquery-rails
@@ -343,6 +340,7 @@ DEPENDENCIES
   newrelic_rpm
   paranoia (~> 2.0)
   pg
+  quiet_assets
   rack_session_access
   railroady
   rails (~> 4.2.0)
@@ -365,6 +363,3 @@ DEPENDENCIES
   uri-handler
   url_validator
   webmock (= 1.20.0)
-
-BUNDLED WITH
-   1.10.5
