@@ -5,12 +5,12 @@ Feature: Orphans UI
 
   Background:
     Given the following organisations exist:
-      | name               | address        | email             | postcode |
-      | The Organisation   | 83 pinner road | no_owner@org.org  | HA1 4HZ  |
-      | The Same Email Org | 84 pinner road | no_owner@org.org  | HA1 4HZ  |
-      | Crazy Email Org    | 30 pinner road | sahjkgdsfsajnfds  | HA1 4HZ  |
-      | My Organisation    | 30 pinner road | superadmin@myorg.com   | HA1 4HZ  |
-      | Yet Another Org    | 30 pinner road | superadmin@another.org | HA1 4HZ  |
+      | name               | description    | address        | email             | postcode |
+      | The Organisation   | Awesome people | 83 pinner road | no_owner@org.org  | HA1 4HZ  |
+      | The Same Email Org | Awesome people | 84 pinner road | no_owner@org.org  | HA1 4HZ  |
+      | Crazy Email Org    | Awesome people | 30 pinner road | sahjkgdsfsajnfds  | HA1 4HZ  |
+      | My Organisation    | Awesome people | 30 pinner road | superadmin@myorg.com   | HA1 4HZ  |
+      | Yet Another Org    | Awesome people | 30 pinner road | superadmin@another.org | HA1 4HZ  |
     And the following users are registered:
       | email                 | password       | superadmin | confirmed_at        | organisation    | pending_organisation |
       | nonsuperadmin@myorg.com    | mypassword1234 | false | 2008-01-01 00:00:00 |                 |                      |
@@ -19,7 +19,7 @@ Feature: Orphans UI
       | invited-superadmin@org.org | password123    | false | 2008-01-01 00:00:00 |                 |                      |
     And the superadmin invited a user for "Yet Another Org"
 
-  @javascript
+  @javascript @vcr @billy
   Scenario: Super Admin can invite users but only for unique emails
     Given cookies are approved
     Given I am signed in as a superadmin
@@ -36,7 +36,7 @@ Feature: Orphans UI
     And I visit the invite users to become admin of organisations page
     Then I should not see "Yet Another Org"
 
-  @javascript
+  @javascript  
   Scenario: Super Admin should be notified when email is invalid
     Given cookies are approved
     Given I am signed in as a superadmin
@@ -59,7 +59,7 @@ Feature: Orphans UI
     And I should see "You must be signed in as a superadmin to perform this action!"
 
   #These next two scenarios apply to layouts/invitation_table
-  @javascript
+  @javascript @billy
   Scenario: Table columns should be sortable
     Given cookies are approved
     Given I am signed in as a superadmin
@@ -69,7 +69,7 @@ Feature: Orphans UI
     When I click tableheader "Name"
     Then I should see "The Organisation" before "Crazy Email Org"
 
-  @javascript
+  @javascript @billy
   Scenario: Select All button toggles all checkboxes
     Given cookies are approved
     Given I am signed in as a superadmin

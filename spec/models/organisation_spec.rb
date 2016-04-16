@@ -52,7 +52,8 @@ describe Organisation, :type => :model do
       [ 365, 366, 500 ].each do |days|
         it "returns small icon when update is #{days} days old" do
           # adds generous 5 second pad for query to run
-          past_time = Time.current.advance(days: -days).advance(seconds: -5)
+          past_time = days == 365 ? Time.current.advance(years: -1) : Time.current.advance(days: -days)
+          past_time = past_time.advance(seconds: -5)
           expect(
             build_org_with_computed_fields_and_updated_at(
               @org1, past_time
@@ -251,7 +252,7 @@ describe Organisation, :type => :model do
       expect(org.name).to eq('Harrow Baptist Church')
       expect(org.description).to eq('No information recorded')
       expect(org.address).to eq('Harrow Baptist Church, College Road, Harrow')
-      expect(org.postcode).to eq('')
+      expect(org.postcode).to eq('No information recorded')
       expect(org.website).to eq('http://www.harrow-baptist.org.uk')
       expect(org.telephone).to eq('020 8863 7837')
       expect(org.donation_info).to eq("")
@@ -262,8 +263,8 @@ describe Organisation, :type => :model do
       org = create_organisation(fields)
       expect(org.name).to eq('Harrow Baptist Church')
       expect(org.description).to eq('No information recorded')
-      expect(org.address).to eq('')
-      expect(org.postcode).to eq('')
+      expect(org.address).to eq('No information recorded')
+      expect(org.postcode).to eq('No information recorded')
       expect(org.website).to eq('http://www.harrow-baptist.org.uk')
       expect(org.telephone).to eq('020 8863 7837')
       expect(org.donation_info).to eq("")
@@ -288,9 +289,18 @@ describe Organisation, :type => :model do
       fields = CSV.parse('HARROW BAPTIST CHURCH,1129832,NO INFORMATION RECORDED,MR JOHN ROSS NEWBY,"HARROW BAPTIST CHURCH, COLLEGE ROAD, HARROW, HA1 4HZ",http://www.harrow-baptist.org.uk,020 8863 7837,2009-05-27,,,,,,http://OpenlyLocal.com/charities/57879-HARROW-BAPTIST-CHURCH,,,,,"207,305,108,302,306",false,2010-09-20T21:38:52+01:00,2010-08-22T22:19:07+01:00,2012-04-15T11:22:12+01:00,*****')
       expect(lambda{
         org = create_organisation(fields)
-      }).to raise_error
+      }).to raise_error CSV::MalformedCSVError
     end
 
+    it 'should be able to substitute with empty string when data is missing' do
+      attributes = {name: '',
+                    address: '',
+                    description: '',
+                    postcode: '',
+                    website: '',
+                    telephone: ''}
+      expect { Organisation.create_and_substitute_with_empty attributes }.not_to raise_error
+    end
 
     def create_organisation(fields)
       row = CSV::Row.new(@headers, fields.flatten)

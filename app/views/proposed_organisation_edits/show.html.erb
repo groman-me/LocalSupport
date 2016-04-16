@@ -1,7 +1,9 @@
+<% if @proposed_organisation_edit.editor %>
 <div class="centered width_50 proposer">
   <span>This edit proposed by:</span>
   <%= @proposed_organisation_edit.editor.email%>
 </div>
+<% end %>
 
 <div class="row">
   <div class="span6">
@@ -152,7 +154,7 @@
             <%= f.hidden_field :description, value: @proposed_organisation_edit.description %>
             <%= f.hidden_field :donation_info, value: @proposed_organisation_edit.donation_info %>
             <% if @proposed_organisation_edit.editable?(:address, by: @proposed_organisation_edit.editor) %>
-            <%= f.hidden_field :address, value: @proposed_organisation_edit.address %>\
+            <%= f.hidden_field :address, value: @proposed_organisation_edit.address %>
             <% end %>
             <%= f.hidden_field :postcode, value: @proposed_organisation_edit.postcode %>
             <% if @proposed_organisation_edit.editable?(:telephone, by: @proposed_organisation_edit.editor)%>

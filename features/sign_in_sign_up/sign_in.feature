@@ -17,6 +17,7 @@ Background:
   Given I visit the home page
   And cookies are approved
 
+@vcr
 Scenario: Sign in for an existing non-superadmin user unassociated with any organisation
   Given I sign in as "normal_user@example.com" with password "pppppppp"
   Then I should see a link or button "normal_user@example.com"
@@ -41,6 +42,14 @@ Scenario: Sign in for an existing superadmin user
   Then I should be on the home page
   And I should see a link or button "superadmin@example.com"
 
+Scenario: Sign in for an existing superadmin user after search
+  Given I visit the home page
+  And I fill in "Optional Search Text" with "search words" within the main body
+  And I press "Submit"
+  And I sign in as "superadmin@example.com" with password "pppppppp"
+  Then I should be on the home page
+  And I should see a link or button "superadmin@example.com"
+
 Scenario: Sign in with wrong password for an existing superadmin user
   Given I sign in as "superadmin@example.com" with password "12345"
   Then I should be on the sign in page
@@ -51,7 +60,7 @@ Scenario: Sign in for a non-existent user
   Then I should be on the sign in page
   And I should see "I'm sorry, you are not authorized to login to the system"
 
-@javascript
+@javascript @billy
 Scenario: Check that login/register toggle works
   # when first opened
   Given I click "Login"

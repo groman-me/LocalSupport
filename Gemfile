@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-# ruby '2.0.0'
+# ruby '2.3.0'
 gem 'rails', '~> 4.2.0'
 gem 'pg'
 gem 'devise', '~> 3.4.0'
@@ -32,6 +32,7 @@ end
 group :development do
   #gem 'ruby-debug19', :require => 'ruby-debug'
   #gem 'debugger', '~> 1.6.8'
+  gem "letter_opener"
   gem 'railroady'
   gem 'quiet_assets'
 end
@@ -47,6 +48,12 @@ group :test do
   gem 'selenium'
   gem 'selenium-client'
   gem 'coveralls', :require => false
+  gem 'shoulda'
+  gem 'rspec-activemodel-mocks'
+  gem 'vcr'
+  gem 'puffing-billy'
+  gem 'poltergeist'
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
 
 group :production do
@@ -86,6 +93,10 @@ gem 'redcarpet'
 # validating organisation website URLs
 gem 'url_validator'
 
+gem 'httparty'
 
 gem 'rails_autolink'
 gem "paranoia", "~> 2.0"
+
+gem 'dotenv-rails'
+gem 'airbrake'
